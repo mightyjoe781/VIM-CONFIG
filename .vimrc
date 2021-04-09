@@ -54,7 +54,8 @@ set hidden
 " the string being searched are lowercase. However, the search becomes
 " case-sensitive if it contains any capital letters. This makes searc
 " -hing more convenient.
-set ignorecase set smartcase
+set ignorecase 
+set smartcase
 
 " Enable searching as you type, rather than waiting till you press
 " enter.
@@ -69,10 +70,12 @@ set noerrorbells visualbell t_vb=
 
 " Enable mouse support. You should avoid relying on this too much, but
 " it can sometimes be convenient.
-set mouse+=a filetype plugin indent on " enable file type detection
+set mouse+=a 
+filetype plugin indent on " enable file type detection
 set autoindent
 " open new split panes to right and bottom, which feels more natural
-set splitbelow set splitright
+set splitbelow 
+set splitright
 " Try to prevent bad habits like using the arrow keys for movement.
 " This is not the only possible bad habit. For example, holding down
 " the h/j/k/l keys
@@ -91,38 +94,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-"---------------------------------------------------------------------
-" GUI & Terminal Settings
-
-if has("gui_running")
-  if has("gui_macvim")
-    set guifont=Consolas:h15
-  elseif has("gui_win32")
-	autocmd GUIEnter * simalt ~x " open maximize in Windows
-	set guifont=Consolas:h11
-  endif
-	set guioptions= " disable all UI options
-	set guicursor+=a:blinkon0 " disable blinking cursor
-    set ballooneval
-	autocmd GUIEnter * set novisualbell t_vb=
-else
-  set noerrorbells novisualbell t_vb=
-  if !s:is_nvim
-    set term=xterm
-  endif
-  set t_ut= " setting for looking properly in tmux
-  set t_BE= " disable bracketed-paste mode
-  let &t_Co = 256
-  if s:is_windows " trick to support 256 colors and	scroll in conemu
-	let &t_AF="\e[38;5;%dm"
-	let &t_AB="\e[48;5;%dm"
-	inoremap <esc>[62~ <c-x><c-e>
-	inoremap <esc>[63~ <c-x><c-y>
-	nnoremap <esc>[62~ 3<c-e>
-	nnoremap <esc>[63~ 3<c-y>
-  endif
-endif
-
 "--------------------------------------------------------------------
 " Basic-Config 2
 
@@ -140,8 +111,6 @@ map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " subdirectory and they will add to 'runtimepath'
 " All the pathogen plugin can be extracted under subdirectory
 " ~/.vim/bundle
-
-execute pathogen#infect() 
 
 "This is ctrlp.vim plugin
 set runtimepath^=~/.vim/bundle/ctrlp.vim
